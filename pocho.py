@@ -88,7 +88,7 @@ def lunch_add(bot, trigger):
     """
     Add to lunch: .lunch_add <nickname>
     """
-    nick_name = trigger.group(2)
+    nick_name = trigger.group(2).strip().replace(":", "")
     # Check for existing lunch
     if bot.memory.contains(nick_name):
         if not (trigger.nick in bot.memory[nick_name]['diners']):
