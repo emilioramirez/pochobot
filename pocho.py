@@ -1,21 +1,21 @@
+from __future__ import unicode_literals
 import willie
 from datetime import date
-from random import randint
 from decimal import Decimal, InvalidOperation
 
 TWOPLACES = Decimal(10) ** -2
 CHANNEL = "#the_it_crowd"
 MESSAGES = {
-    'existing_lunch': 'Ya tenés un almuerzo creado. No podés crear otro hasta que canceles el actual (.help lunch_cancel).',
-    'unexisting_menu': 'No existe ningún menú de {nick}. Podés crear el tuyo (.help lunch_create).',
-    'create_lunch': 'Necesitás crear un lunch antes de publicarlo (.help lunch_create).',
-    'created_lunch': 'Lunch creado. Podés cancelarlo (.help lunch_cancel).',
-    'publish_lunch': 'Comida: {nick} ha creado un almuerzo: {menu}. ¿Te sumás? (.lunch_add {nick}).',
-    'deleted_lunch': 'Tu menú "{menu}" ha sido borrado. Podés crear uno nuevo (.help lunch_create).',
-    'added_lunch': 'Estás contado para el menú "{menu}".',
-    'price_lunch': 'El precio por pera del menú de {nick} "{menu}" es {price}.',
-    'not_in_channel': 'El bot no está en el canal {channel}.',
-    'not_total_price': 'Necesito que me digas cuánto costó el menú. (.help lunch_done)',
+    'existing_lunch': 'Ya tenes un almuerzo creado, no podes crear otro hasta que canceles el actual. (.help lunch_cancel)',
+    'unexisting_menu': 'No existe ningun menu de {nick}. Puedes crear el tuyo. (.help lunch_create)',
+    'create_lunch': 'Necesitas crear un lunch antes de publicarlo. (.help lunch_create)',
+    'created_lunch': 'Lunch creado. Podes cancelarlo (.help lunch_cancel)',
+    'publish_lunch': 'Comida: {nick} ha creado un almuerzo: {menu}. te sumas? (.lunch_add {nick})',
+    'deleted_lunch': 'Tu menu "{menu}" ha sido borrado. Podes crear el nuevo (.help lunch_create)',
+    'added_lunch': 'Estas contado para el menu "{menu}".',
+    'price_lunch': 'El precio por pera del menu de {nick} "{menu}" es {price}.',
+    'not_in_channel': 'El bot no esta en el canal {channel}.',
+    'not_total_price': 'Necesito que me digas cuanto costo el almuerzo. (.help lunch_done)',
 }
 
 
@@ -36,7 +36,7 @@ def lunch_create(bot, trigger):
         bot.memory[trigger.nick] = {
             'menu': menu,
             'date': date.today(),
-            'diners': [trigger.nick,],
+            'diners': [trigger.nick, ],
             'open': True
         }
         bot.msg(trigger.nick, MESSAGES['created_lunch'])
@@ -92,7 +92,7 @@ def lunch_add(bot, trigger):
     # Check for existing lunch
     if bot.memory.contains(nick_name):
         if not (trigger.nick in bot.memory[nick_name]['diners']):
-            menu = bot.memory[nick_name]['diners'].append(trigger.nick)
+            bot.memory[nick_name]['diners'].append(trigger.nick)
         bot.msg(trigger.nick, MESSAGES['added_lunch'].format(menu=bot.memory[nick_name]['menu']))
         return
     else:
