@@ -19,6 +19,7 @@ MESSAGES = {
     'list_lunch': 'Almuerzos creados.',
     'list_lunch_item': 'Menu {owner}: {menu}. (Vacantes {vacants}).',
     'no_more_limit': 'No hay mas vacantes para el menu de {nick}.',
+    'no_lunches': 'No hay nigun menu creado',
 }
 
 
@@ -237,5 +238,5 @@ def lunch_list(bot, trigger):
                 menu=menu['menu'], owner=nick, vacants=limit))
         return
     # Storage lunch do not exits
-    bot.msg(trigger.nick, MESSAGES['create_lunch'])
+    bot.msg(trigger.nick, MESSAGES['no_lunches'])
     return
