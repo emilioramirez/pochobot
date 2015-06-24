@@ -27,7 +27,7 @@ MESSAGES = {
 @willie.module.example('.lunch_create milanesas con pure')
 def lunch_create(bot, trigger):
     """
-    Set a lunch for today: .lunch_create <menu descrition>
+    Set a lunch for today: .lunch_create <menu description>
 
     """
     menu = trigger.group(2).strip()
